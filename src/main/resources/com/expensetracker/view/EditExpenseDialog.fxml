@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="16" styleClass="content-area" stylesheets="@dark-theme.css"
+      prefWidth="520" 
+      xmlns="http://javafx.com/javafx/21" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.expensetracker.controller.EditExpenseDialogController">
+
+    <!-- Header -->
+    <VBox spacing="4">
+        <Label text="✏️ Edit Expense" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f9fafb;" />
+        <Label text="Modify the transaction details and click Update." style="-fx-text-fill: #9ca3af; -fx-font-size: 12px;" />
+    </VBox>
+
+    <!-- Error Label -->
+    <Label fx:id="lblFeedback" styleClass="feedback-error" wrapText="true" maxWidth="Infinity" visible="false" managed="false" />
+
+    <!-- Form Grid -->
+    <GridPane hgap="12" vgap="14">
+        <columnConstraints>
+            <ColumnConstraints percentWidth="50" />
+            <ColumnConstraints percentWidth="50" />
+        </columnConstraints>
+
+        <!-- Amount -->
+        <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="0">
+            <Label text="AMOUNT (₹) *" styleClass="form-label" />
+            <TextField fx:id="txtAmount" />
+        </VBox>
+
+        <!-- Category -->
+        <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="0">
+            <Label text="CATEGORY *" styleClass="form-label" />
+            <ComboBox fx:id="comboCategory" maxWidth="Infinity" />
+        </VBox>
+
+        <!-- Date -->
+        <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="1">
+            <Label text="DATE *" styleClass="form-label" />
+            <DatePicker fx:id="dpDate" maxWidth="Infinity" />
+        </VBox>
+
+        <!-- Payment Method -->
+        <VBox spacing="4" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label text="PAYMENT METHOD *" styleClass="form-label" />
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <fx:define>
+                    <ToggleGroup fx:id="tgPaymentMethod" />
+                </fx:define>
+                <RadioButton fx:id="rbCash" text="💵" toggleGroup="$tgPaymentMethod" />
+                <RadioButton fx:id="rbUpi" text="📱" toggleGroup="$tgPaymentMethod" />
+                <RadioButton fx:id="rbCard" text="💳" toggleGroup="$tgPaymentMethod" />
+            </HBox>
+        </VBox>
+
+        <!-- Note -->
+        <VBox spacing="4" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+            <Label text="NOTE" styleClass="form-label" />
+            <TextField fx:id="txtNote" />
+        </VBox>
+    </GridPane>
+
+    <!-- Buttons -->
+    <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 10 0 0 0;">
+        <Button text="Cancel" styleClass="btn-secondary" onAction="#handleCancel" />
+        <Button text="Update Expense" styleClass="btn-primary" onAction="#handleUpdate" />
+    </HBox>
+
+</VBox>
