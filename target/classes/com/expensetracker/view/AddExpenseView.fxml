@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20" styleClass="content-area" 
+      xmlns="http://javafx.com/javafx/21" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.expensetracker.controller.AddExpenseController">
+
+    <!-- Form Container Card -->
+    <VBox styleClass="card" spacing="20" maxWidth="680">
+        
+        <!-- Form Header -->
+        <VBox spacing="4">
+            <Label text="Record a New Expense" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f9fafb;" />
+            <Label text="Enter transaction details below. All expenses are recorded in Indian Rupees (₹)." 
+                   style="-fx-text-fill: #9ca3af; -fx-font-size: 13px;" />
+        </VBox>
+
+        <!-- Feedback Alert Label (Visible only on success/error/warning) -->
+        <Label fx:id="lblFeedback" wrapText="true" maxWidth="Infinity" visible="false" managed="false" />
+
+        <!-- Form Input Grid -->
+        <GridPane hgap="16" vgap="18">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50" />
+                <ColumnConstraints percentWidth="50" />
+            </columnConstraints>
+
+            <!-- Row 1: Amount -->
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <Label text="AMOUNT (₹) *" styleClass="form-label" />
+                <TextField fx:id="txtAmount" promptText="e.g. 450.00" />
+            </VBox>
+
+            <!-- Row 1: Category -->
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <Label text="CATEGORY *" styleClass="form-label" />
+                <ComboBox fx:id="comboCategory" promptText="Select Category" maxWidth="Infinity" />
+            </VBox>
+
+            <!-- Row 2: Date -->
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <Label text="DATE *" styleClass="form-label" />
+                <DatePicker fx:id="dpDate" maxWidth="Infinity" />
+            </VBox>
+
+            <!-- Row 2: Payment Method (Radio Buttons) -->
+            <VBox spacing="6" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <Label text="PAYMENT METHOD *" styleClass="form-label" />
+                <HBox spacing="10" alignment="CENTER_LEFT">
+                    <fx:define>
+                        <ToggleGroup fx:id="tgPaymentMethod" />
+                    </fx:define>
+                    <RadioButton fx:id="rbCash" text="💵 Cash" toggleGroup="$tgPaymentMethod" />
+                    <RadioButton fx:id="rbUpi" text="📱 UPI" toggleGroup="$tgPaymentMethod" />
+                    <RadioButton fx:id="rbCard" text="💳 Card" toggleGroup="$tgPaymentMethod" />
+                </HBox>
+            </VBox>
+
+            <!-- Row 3: Note (Span 2 columns) -->
+            <VBox spacing="6" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2">
+                <Label text="NOTE (OPTIONAL)" styleClass="form-label" />
+                <TextField fx:id="txtNote" promptText="e.g., Grocery shopping at DMart, Metro ticket, Dinner..." />
+            </VBox>
+        </GridPane>
+
+        <!-- Action Buttons -->
+        <HBox spacing="12" alignment="CENTER_LEFT" style="-fx-padding: 10 0 0 0;">
+            <Button fx:id="btnSave" text="💾  Save Expense" styleClass="btn-primary" onAction="#handleSaveExpense" />
+            <Button fx:id="btnClear" text="🔄  Reset Form" styleClass="btn-secondary" onAction="#handleReset" />
+        </HBox>
+
+    </VBox>
+
+</VBox>

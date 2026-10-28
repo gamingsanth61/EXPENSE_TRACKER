@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<HBox spacing="20" styleClass="content-area" 
+      xmlns="http://javafx.com/javafx/21" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.expensetracker.controller.BudgetController">
+
+    <!-- LEFT PANEL: Set / Update Budget Form Card -->
+    <VBox styleClass="card" spacing="16" prefWidth="350" minWidth="320">
+        <VBox spacing="4">
+            <Label text="🎯 Set Monthly Budget" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f9fafb;" />
+            <Label text="Allocate a monthly spending threshold for a category." 
+                   style="-fx-text-fill: #9ca3af; -fx-font-size: 12px;" wrapText="true" />
+        </VBox>
+
+        <!-- Feedback Alert -->
+        <Label fx:id="lblFeedback" wrapText="true" maxWidth="Infinity" visible="false" managed="false" />
+
+        <!-- Form Inputs -->
+        <VBox spacing="14">
+            <!-- Category -->
+            <VBox spacing="6">
+                <Label text="CATEGORY *" styleClass="form-label" />
+                <ComboBox fx:id="comboCategory" promptText="Select Category" maxWidth="Infinity" />
+            </VBox>
+
+            <!-- Monthly Limit -->
+            <VBox spacing="6">
+                <Label text="MONTHLY LIMIT (₹) *" styleClass="form-label" />
+                <TextField fx:id="txtLimit" promptText="e.g. 5000.00" />
+            </VBox>
+
+            <!-- Month & Year Grid -->
+            <GridPane hgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="60" />
+                    <ColumnConstraints percentWidth="40" />
+                </columnConstraints>
+
+                <VBox spacing="6" GridPane.columnIndex="0">
+                    <Label text="MONTH *" styleClass="form-label" />
+                    <ComboBox fx:id="comboFormMonth" maxWidth="Infinity" />
+                </VBox>
+
+                <VBox spacing="6" GridPane.columnIndex="1">
+                    <Label text="YEAR *" styleClass="form-label" />
+                    <ComboBox fx:id="comboFormYear" maxWidth="Infinity" />
+                </VBox>
+            </GridPane>
+
+            <!-- Submit Button -->
+            <Button text="💾  Save / Update Budget" styleClass="btn-primary" maxWidth="Infinity" onAction="#handleSaveBudget" />
+        </VBox>
+
+        <Region VBox.vgrow="ALWAYS" />
+
+        <Label text="💡 When expenses exceed your threshold, warning alerts will guide your spending." 
+               style="-fx-text-fill: #6b7280; -fx-font-size: 11px;" wrapText="true" />
+    </VBox>
+
+    <!-- RIGHT PANEL: Budget Progress List Card -->
+    <VBox styleClass="card" HBox.hgrow="ALWAYS" spacing="16">
+        <!-- Filter Bar -->
+        <HBox alignment="CENTER_LEFT" spacing="12">
+            <VBox spacing="2">
+                <Label text="Budget Progress &amp; Limits" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #f9fafb;" />
+                <Label text="Real-time category progress tracking" style="-fx-text-fill: #9ca3af; -fx-font-size: 12px;" />
+            </VBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <Label text="Viewing:" styleClass="form-label" />
+            <ComboBox fx:id="comboFilterMonth" prefWidth="130" />
+            <ComboBox fx:id="comboFilterYear" prefWidth="90" />
+        </HBox>
+
+        <!-- Dynamic List of Progress Cards -->
+        <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+            <VBox fx:id="boxBudgetCards" spacing="12">
+                <Label fx:id="lblEmptyBudgets" 
+                       text="No budgets configured for this month. Set your first category budget on the left!" 
+                       style="-fx-text-fill: #6b7280; -fx-font-size: 13px; -fx-padding: 30 0 30 0;" />
+            </VBox>
+        </ScrollPane>
+    </VBox>
+
+</HBox>

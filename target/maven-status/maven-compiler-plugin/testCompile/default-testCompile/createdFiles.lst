@@ -1,0 +1,3 @@
+com\expensetracker\util\ValidatorTest.class
+com\expensetracker\model\ModelTest.class
+com\expensetracker\util\CurrencyFormatterTest.class
