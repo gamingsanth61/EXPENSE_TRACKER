@@ -1,0 +1,7 @@
+# MySQL Database Configuration
+# Copy this file to 'config.properties' and set your real credentials.
+# NOTE: 'config.properties' is ignored by Git to keep your credentials safe.
+
+db.url=jdbc:mysql://localhost:3306/expense_tracker_db?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+db.user=expense_user
+db.password=your_password_here
